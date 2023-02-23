@@ -1,4 +1,5 @@
 import constants
+from Attack import Attack
 from AttackValidator import AttackValidator
 from constants import *
 from errorconstants import *
@@ -36,6 +37,8 @@ def _parse_arguments():
         if opt == '-c':
             try:
                 num_of_packets_to_send = int(argument)
+                if num_of_packets_to_send < ZERO:
+                    sys.exit(NUM_OF_PACKETS_NEGATIVE_ERROR_MSG)
             except ValueError:
                 sys.exit(NUM_OF_PACKETS_ERROR_MSG)
         if opt == '-d':
@@ -54,6 +57,20 @@ def _parse_arguments():
                 type_of_attack = argument
             else:
                 sys.exit(INVALID_ATTACK_MSG)
+        if opt == '--min_port':
+            try:
+                min_port = int(argument)
+                if min_port < ZERO or min_port > MAX_PORT:
+                    sys.exit(INVALID_MIN_PORT_NUMBER_MSG)
+            except ValueError:
+                sys.exit(MIN_PORT_NUMBER_NOT_INT_MSG)
+        if opt == '--max_port':
+            try:
+                max_port = int(argument)
+                if max_port < ZERO or max_port > MAX_PORT:
+                    sys.exit(INVALID_MAX_PORT_NUMBER_MSG)
+            except ValueError:
+                sys.exit(MAX_PORT_NOT_SPECIFIED_MSG)
         if opt == '--help':
             print("HELP")
 
@@ -77,7 +94,7 @@ if __name__ == '__main__':
     # Launch Attack
     match attack_type:
         case constants.PORT_SCAN:
-            print("PORT")
+            Attack.port_scan(target_ip=dest_ip, min_port=min_port, max_port=max_port)
         case constants.SYN_FLOOD:
             print("SYN")
         case constants.XMAS_TREE:
@@ -92,4 +109,3 @@ if __name__ == '__main__':
     Layer4 = TCP()
     Layer4.show()
 
-# TO-DO: Implement feature for min-port and max-port + --help + everything else
