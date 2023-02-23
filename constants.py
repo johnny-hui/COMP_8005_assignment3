@@ -1,0 +1,2 @@
+ZERO = 0
+MAX_PORT = 65536
