@@ -1,11 +1,9 @@
 import constants
 from Attack import Attack
 from AttackValidator import AttackValidator
-from constants import *
 from errorconstants import *
 import getopt
-from scapy.layers.inet import IP, TCP
-from scapy.layers.l2 import Ether
+from Init import *
 import sys
 
 
@@ -85,7 +83,8 @@ def _parse_arguments():
 
 
 if __name__ == '__main__':
-    # Initialize Variables
+    # Initialize Program
+    Init.initialize()
 
     # Parse Args
     dest_ip, port, source_ip, number_of_packets, \
@@ -94,18 +93,9 @@ if __name__ == '__main__':
     # Launch Attack
     match attack_type:
         case constants.PORT_SCAN:
-            Attack.port_scan(target_ip=dest_ip, min_port=min_port, max_port=max_port)
+            Attack.port_scan(target_ip=dest_ip, src_ip=source_ip,
+                             min_port=min_port, max_port=max_port)
         case constants.SYN_FLOOD:
             print("SYN")
         case constants.XMAS_TREE:
             print("XMAS")
-
-    # Layer2 = Ether()
-    # Layer2.show()
-
-    Layer3 = IP()
-    Layer3.show()
-
-    Layer4 = TCP()
-    Layer4.show()
-
