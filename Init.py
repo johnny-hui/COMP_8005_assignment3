@@ -30,12 +30,30 @@ def _check_args(opts):
         sys.exit(NO_ARG_ERROR)
 
 
-def _display_args(dest_ip, port, source_ip,
-                  number_of_packets, attack_type,
-                  min_port, max_port):
-    data = []
+def _display_args(*args):
+    data = INITIAL_TABLE_DATA
+    header = TABLE_HEADER
 
+    _display_args_helper(args, data)
+
+    print(tabulate(data, headers=header))
     print(WELCOME_DECORATION)
+
+
+def _display_args_helper(args, data):
+    index = ZERO
+    for arg in args:
+        if arg == ZERO or arg == "":
+            data[index].append(NOT_PROVIDED_STR)
+        elif arg == XMAS_TREE:
+            data[index].append(XMAS_TREE_STR)
+        elif arg == PORT_SCAN:
+            data[index].append(PORT_SCAN_STR)
+        elif arg == SYN_FLOOD:
+            data[index].append(SYN_FLOOD_STR)
+        else:
+            data[index].append(arg)
+        index += 1
 
 
 def _display_welcome():
