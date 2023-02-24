@@ -1,7 +1,7 @@
-import getopt
 from AttackValidator import AttackValidator
 from Constants.constants import *
 from Constants.errorconstants import *
+import getopt
 import os
 import sys
 from tabulate import tabulate
@@ -51,6 +51,8 @@ def _display_args_helper(args, data):
             data[index].append(PORT_SCAN_STR)
         elif arg == SYN_FLOOD:
             data[index].append(SYN_FLOOD_STR)
+        elif arg == ICMP_FLOOD:
+            data[index].append(ICMP_FLOOD_STR)
         else:
             data[index].append(arg)
         index += 1

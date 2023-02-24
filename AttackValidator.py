@@ -14,5 +14,7 @@ class AttackValidator:
                 return True
             case constants.XMAS_TREE:
                 return True
+            case constants.ICMP_FLOOD:
+                return True
             case _:
                 return False

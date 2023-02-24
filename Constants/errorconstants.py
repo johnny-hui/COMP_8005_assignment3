@@ -1,7 +1,6 @@
 NO_ARG_ERROR = "[+] NO_ARG_ERROR: No arguments were passed in!"
 NO_ATTACK_SPECIFIED_MSG = "[+] ARG_ERROR (--attack=): The type of attack was not specified!\n" \
                           "[+] Please refer to --help option for list of possible attacks."
-
 NO_TARGET_IP_MSG = "[+] ARG_ERROR: The target IP (-d) option was not specified!"
 INVALID_ATTACK_MSG = "[+] ARG_ERROR (--attack=): An invalid attack was provided!\n" \
                      "[+] Please refer to --help option for list of possible attacks."

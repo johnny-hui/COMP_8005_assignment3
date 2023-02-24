@@ -2,6 +2,7 @@
 AUTHOR = "Johnny Hui"
 AUTHOR_ID = "A00973103"
 
+
 # Init Constants
 WELCOME_MSG = f"A program demonstrating common TCP attacks (using Scapy) \nBy {AUTHOR} ({AUTHOR_ID})"
 WELCOME_DECORATION = "=============================================================================================" \
@@ -18,6 +19,7 @@ INITIAL_TABLE_DATA = [["-d", DEST_IP_STR], ["-p", PORT_NUMBER], ["-s", SRC_IP_ST
 TABLE_HEADER = ["Flag", "Option", "Value Set"]
 NOT_PROVIDED_STR = "N/A"
 
+
 # TCP Config
 LONG_OPTS = ['attack=', 'help', 'min_port=', 'max_port=']
 PORT_SCAN = "port_scan"
@@ -26,12 +28,15 @@ SYN_FLOOD = "syn_flood"
 SYN_FLOOD_STR = "SYN Flood"
 XMAS_TREE = "xmas"
 XMAS_TREE_STR = "Christmas Tree"
+ICMP_FLOOD = "icmp"
+ICMP_FLOOD_STR = "ICMP Flood"
 MAX_PORT = 65536
 MIN_PORT = 1
 MAX_PAYLOAD_SIZE = 1024
 ZERO = 0
 RESPONSE_TIMEOUT = 0.5
 SYN_ACK_HEX = 0x12
+
 
 # TCP Flags
 SYN = 'S'
@@ -44,7 +49,12 @@ ECE = 'E'
 URG = 'U'
 ALL_FLAGS = f'{SYN}{RST}{FIN}{PSH}{ACK}{CWR}{ECE}{URG}'
 
+
 # Attack Messages
+ICMP_FLOOD_INIT_MSG = "[+] ICMP FLOOD: Launching ICMP flood on "
+ICMP_FLOOD_STOP_MSG = "[+] ICMP FLOOD: Press CTRL+C to stop the attack..."
+ICMP_FLOOD_COMPLETE_MSG = "[+] ICMP FLOOD COMPLETE!"
+ICMP_FLOOD_COMPLETE_FORCE_MSG = "[+] ICMP FLOOD COMPLETE: Forced Stop (CTRL+C was pressed)"
 PORT_SCAN_INIT_MSG = "[+] PORT SCAN: Launching port scanner..."
 SYN_FLOOD_INIT_MSG = "[+] SYN FLOOD: Launching syn flood attack on "
 SYN_FLOOD_STOP_MSG = "[+] SYN FLOOD: Press CTRL+C to stop the attack..."

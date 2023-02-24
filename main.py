@@ -18,3 +18,5 @@ if __name__ == '__main__':
         case constants.XMAS_TREE:
             Attack.xmas_tree(target_ip=dest_ip, port=port,
                              num_of_pkts=number_of_packets)
+        case constants.ICMP_FLOOD:
+            Attack.icmp_flood(target_ip=dest_ip, num_of_pkts=number_of_packets)
