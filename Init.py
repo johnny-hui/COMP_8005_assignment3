@@ -1,6 +1,7 @@
 from AttackValidator import AttackValidator
 from Constants.constants import *
 from Constants.errorconstants import *
+from Help import Help
 import getopt
 import os
 import sys
@@ -63,6 +64,10 @@ def _display_welcome():
     print(WELCOME_DECORATION)
 
 
+def _help_menu():
+    Help.print_help_manual()
+
+
 def _parse_arguments():
     dst_ip = ""
     src_ip = ""
@@ -121,7 +126,8 @@ def _parse_arguments():
             except ValueError:
                 sys.exit(MAX_PORT_NOT_SPECIFIED_MSG)
         if opt == '--help':
-            print("HELP")
+            _help_menu()
+            exit()
 
     # Critical Variables Check
     if type_of_attack == "":

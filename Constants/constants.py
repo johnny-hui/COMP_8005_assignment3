@@ -2,7 +2,6 @@
 AUTHOR = "Johnny Hui"
 AUTHOR_ID = "A00973103"
 
-
 # Init Constants
 WELCOME_MSG = f"A program demonstrating common TCP attacks (using Scapy) \nBy {AUTHOR} ({AUTHOR_ID})"
 WELCOME_DECORATION = "=============================================================================================" \
@@ -18,7 +17,6 @@ INITIAL_TABLE_DATA = [["-d", DEST_IP_STR], ["-p", PORT_NUMBER], ["-s", SRC_IP_ST
                       ["--attack", TYPE_ATTACK], ["--min_port", MIN_PORT_STR], ["--max_port", MAX_PORT_STR]]
 TABLE_HEADER = ["Flag", "Option", "Value Set"]
 NOT_PROVIDED_STR = "N/A"
-
 
 # TCP Config
 LONG_OPTS = ['attack=', 'help', 'min_port=', 'max_port=']
@@ -37,7 +35,6 @@ ZERO = 0
 RESPONSE_TIMEOUT = 0.5
 SYN_ACK_HEX = 0x12
 
-
 # TCP Flags
 SYN = 'S'
 RST = 'R'
@@ -48,7 +45,6 @@ CWR = 'C'
 ECE = 'E'
 URG = 'U'
 ALL_FLAGS = f'{SYN}{RST}{FIN}{PSH}{ACK}{CWR}{ECE}{URG}'
-
 
 # Attack Messages
 ICMP_FLOOD_INIT_MSG = "[+] ICMP FLOOD: Launching ICMP flood on "
@@ -68,5 +64,13 @@ SPOOF_SOURCE_IP_MSG = "[+] SPOOF: Source IP (-s) argument was not provided.\n" \
                       "[+] SPOOF: Now spoofing your source IP..."
 SPOOF_SOURCE_IP_FINAL_MSG = "[+] SPOOF COMPLETE: Your IP is now "
 RANDOMIZE_PORT_MSG = "[+] PORT NUMBER: Port number (-p) argument was not provided.\n" \
-                               "[+] PORT NUMBER: Now generating a random port for attack..."
+                     "[+] PORT NUMBER: Now generating a random port for attack..."
 RANDOMIZE_FINAL_MSG = "[+] GENERATE COMPLETE: The port to attack is now "
+
+
+# Help Messages
+HELP_PROGRAM_TERMINATE_MSG = "[+] PROGRAM TERMINATE: Program has been terminated!"
+BOLD_START = "\033[1m"
+BOLD_END = "\033[0m"
+UNDERLINE_START = "\033[4m"
+UNDERLINE_END = "\033[0m"
