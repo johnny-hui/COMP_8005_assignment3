@@ -1,3 +1,5 @@
+import ipaddress
+
 from AttackValidator import AttackValidator
 from Constants.constants import *
 from Constants.errorconstants import *
@@ -28,6 +30,20 @@ def _check_if_root_user():
 def _check_args(opts):
     if len(opts) == ZERO:
         sys.exit(NO_ARG_ERROR)
+
+
+def _check_dst_ip(argument):
+    try:
+        ipaddress.ip_address(argument)
+    except ValueError:
+        sys.exit(INVALID_DST_IP_MSG)
+
+
+def _check_src_ip(argument):
+    try:
+        ipaddress.ip_address(argument)
+    except ValueError:
+        sys.exit(INVALID_SRC_IP_MSG)
 
 
 def _display_args(*args):
@@ -95,6 +111,7 @@ def _parse_arguments():
             except ValueError:
                 sys.exit(NUM_OF_PACKETS_ERROR_MSG)
         if opt == '-d':
+            _check_dst_ip(argument)
             dst_ip = argument
         if opt == '-p':
             try:
@@ -104,6 +121,7 @@ def _parse_arguments():
             except ValueError:
                 sys.exit(PORT_NUMBER_NOT_INT_MSG)
         if opt == '-s':
+            _check_src_ip(argument)
             src_ip = argument
         if opt == '--attack':
             if AttackValidator.is_valid(argument):
@@ -123,7 +141,7 @@ def _parse_arguments():
                 if max_port < ZERO or max_port > MAX_PORT:
                     sys.exit(INVALID_MAX_PORT_NUMBER_MSG)
             except ValueError:
-                sys.exit(MAX_PORT_NOT_SPECIFIED_MSG)
+                sys.exit(MAX_PORT_NUMBER_NOT_INT_MSG)
         if opt == '--help':
             _help_menu()
             exit()

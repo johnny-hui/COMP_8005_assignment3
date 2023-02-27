@@ -9,6 +9,8 @@ INVALID_ATTACK_MSG = "[+] ARG_ERROR (--attack=): An invalid attack was provided!
 INVALID_PORT_NUMBER_MSG = "[+] ARG_ERROR: Port number cannot be negative or exceed 65536!"
 INVALID_MIN_PORT_NUMBER_MSG = "[+] ARG_ERROR: Min port number (--min_port) cannot be negative or exceed 65536!"
 INVALID_MAX_PORT_NUMBER_MSG = "[+] ARG_ERROR: Max port number (--max_port) cannot be negative or exceed 65536!"
+INVALID_DST_IP_MSG = "[+] ARG ERROR: The target IP address (-d option) is not valid!"
+INVALID_SRC_IP_MSG = "[+] ARG ERROR: The source IP address (-s option) is not valid!"
 PORT_NUMBER_NOT_INT_MSG = "[+] ValueError: Port (-p option) is not an integer!"
 MIN_PORT_NUMBER_NOT_INT_MSG = "[+] ValueError: Min Port (--min_port option) is not an integer!"
 MAX_PORT_NUMBER_NOT_INT_MSG = "[+] ValueError: Max Port (--max_port option) is not an integer!"
