@@ -1,3 +1,4 @@
+from Constants import constants
 from Constants.constants import *
 from Constants.errorconstants import *
 import random
@@ -83,6 +84,24 @@ class Attack:
         # Send XMAS tree packets
         _send_xmas_tree_flood(num_of_pkts, packet)
         print(WELCOME_DECORATION)
+
+    @staticmethod
+    def launch_attack(attack: str, dest_ip: str, port: int,
+                      source_ip: str, number_of_packets: int,
+                      min_port: int, max_port: int):
+
+        match attack:
+            case constants.PORT_SCAN:
+                Attack.port_scan(target_ip=dest_ip, src_ip=source_ip,
+                                 min_port=min_port, max_port=max_port)
+            case constants.SYN_FLOOD:
+                Attack.syn_flood(target_ip=dest_ip, port=port,
+                                 num_of_pkts=number_of_packets)
+            case constants.XMAS_TREE:
+                Attack.xmas_tree(target_ip=dest_ip, port=port,
+                                 num_of_pkts=number_of_packets)
+            case constants.ICMP_FLOOD:
+                Attack.icmp_flood(target_ip=dest_ip, num_of_pkts=number_of_packets)
 
 
 ####################################|| ATTACK HELPER FUNCTIONS ||####################################

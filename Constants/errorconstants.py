@@ -1,3 +1,5 @@
+USER_NOT_ROOT_ERROR = "[+] ERROR: Only the 'root' user can run this script!\n" \
+                      "[+] Please run this script again using sudo command."
 NO_ARG_ERROR = "[+] NO_ARG_ERROR: No arguments were passed in!"
 NO_ATTACK_SPECIFIED_MSG = "[+] ARG_ERROR (--attack=): The type of attack was not specified!\n" \
                           "[+] Please refer to --help option for list of possible attacks."

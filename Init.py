@@ -22,8 +22,7 @@ class Init:
 ####################################|| INIT HELPER FUNCTIONS ||####################################
 def _check_if_root_user():
     if not os.geteuid() == 0:
-        sys.exit("[+] ERROR: Only the 'root' user can run this script "
-                 "[Please run this script again using sudo command].")
+        sys.exit(USER_NOT_ROOT_ERROR)
 
 
 def _check_args(opts):
